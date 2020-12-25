@@ -41,8 +41,19 @@ public class ShouBean {
         return data;
     }
 
+
+
     public void setData(DataDTO data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "ShouBean{" +
+                "errno=" + errno +
+                ", errmsg='" + errmsg + '\'' +
+                ", data=" + data +
+                '}';
     }
 
     public static class DataDTO {
@@ -121,6 +132,21 @@ public class ShouBean {
         }
 
         public static class BannerDTO {
+            @Override
+            public String toString() {
+                return "BannerDTO{" +
+                        "id=" + id +
+                        ", adPositionId=" + adPositionId +
+                        ", mediaType=" + mediaType +
+                        ", name='" + name + '\'' +
+                        ", link='" + link + '\'' +
+                        ", imageUrl='" + image_url + '\'' +
+                        ", content='" + content + '\'' +
+                        ", endTime=" + endTime +
+                        ", enabled=" + enabled +
+                        '}';
+            }
+
             /**
              * id : 1
              * ad_position_id : 1
@@ -133,12 +159,13 @@ public class ShouBean {
              * enabled : 1
              */
 
+
             private Integer id;
             private Integer adPositionId;
             private Integer mediaType;
             private String name;
             private String link;
-            private String imageUrl;
+            private String image_url;
             private String content;
             private Integer endTime;
             private Integer enabled;
@@ -149,7 +176,7 @@ public class ShouBean {
                 this.mediaType = mediaType;
                 this.name = name;
                 this.link = link;
-                this.imageUrl = imageUrl;
+                this.image_url = imageUrl;
                 this.content = content;
                 this.endTime = endTime;
                 this.enabled = enabled;
@@ -196,11 +223,11 @@ public class ShouBean {
             }
 
             public String getImageUrl() {
-                return imageUrl;
+                return image_url;
             }
 
             public void setImageUrl(String imageUrl) {
-                this.imageUrl = imageUrl;
+                this.image_url = imageUrl;
             }
 
             public String getContent() {

@@ -58,7 +58,6 @@ public class NextRetrofit implements Imodel {
                             Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[0]).getActualTypeArguments();
                             Type type = actualTypeArguments[0];
                             T json = new Gson().fromJson(string, type);
-
                             callback.OnSuccess(json);
 
                         } catch (IOException e) {
