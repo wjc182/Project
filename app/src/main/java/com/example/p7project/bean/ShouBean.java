@@ -267,14 +267,14 @@ public class ShouBean {
 
             private Integer id;
             private String name;
-            private String url;
+            private String icon_url;
             private String iconUrl;
             private Integer sortOrder;
 
             public ChannelDTO(Integer id, String name, String url, String iconUrl, Integer sortOrder) {
                 this.id = id;
                 this.name = name;
-                this.url = url;
+                this.icon_url = url;
                 this.iconUrl = iconUrl;
                 this.sortOrder = sortOrder;
             }
@@ -295,12 +295,12 @@ public class ShouBean {
                 this.name = name;
             }
 
-            public String getUrl() {
-                return url;
+            public String geticon_url() {
+                return icon_url;
             }
 
-            public void setUrl(String url) {
-                this.url = url;
+            public void seticon_url(String url) {
+                this.icon_url = url;
             }
 
             public String getIconUrl() {

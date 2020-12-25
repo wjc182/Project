@@ -54,7 +54,7 @@ public class SingleLayoutAdapter extends DelegateAdapter.Adapter {
                     public void displayImage(Context context, Object path, ImageView imageView) {
                         ShouBean.DataDTO.BannerDTO newPath= (ShouBean.DataDTO.BannerDTO) path;
                         Log.e("TTT",newPath.toString());
-                        
+
                         Glide.with(context).load(newPath.getImageUrl()).into(imageView);
                      }
                 }).start();
