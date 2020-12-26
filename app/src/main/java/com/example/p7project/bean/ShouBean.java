@@ -322,6 +322,16 @@ public class ShouBean {
 
 
         public static class NewGoodsListDTO {
+            @Override
+            public String toString() {
+                return "NewGoodsListDTO{" +
+                        "id=" + id +
+                        ", name='" + name + '\'' +
+                        ", list_pic_url='" + list_pic_url + '\'' +
+                        ", retail_price='" + retail_price + '\'' +
+                        '}';
+            }
+
             /**
              * id : 1116011
              * name : 蔓越莓曲奇 200克
@@ -331,14 +341,14 @@ public class ShouBean {
 
             private Integer id;
             private String name;
-            private String listPicUrl;
-            private Integer retailPrice;
+            private String list_pic_url;
+            private String retail_price;
 
-            public NewGoodsListDTO(Integer id, String name, String listPicUrl, Integer retailPrice) {
+            public NewGoodsListDTO(Integer id, String name, String listPicUrl, String retailPrice) {
                 this.id = id;
                 this.name = name;
-                this.listPicUrl = listPicUrl;
-                this.retailPrice = retailPrice;
+                this.list_pic_url = listPicUrl;
+                this.retail_price = retailPrice;
             }
 
             public Integer getId() {
@@ -357,20 +367,20 @@ public class ShouBean {
                 this.name = name;
             }
 
-            public String getListPicUrl() {
-                return listPicUrl;
+            public String getList_pic_url() {
+                return list_pic_url;
             }
 
-            public void setListPicUrl(String listPicUrl) {
-                this.listPicUrl = listPicUrl;
+            public void setList_pic_url(String list_pic_url) {
+                this.list_pic_url = list_pic_url;
             }
 
-            public Integer getRetailPrice() {
-                return retailPrice;
+            public String getRetail_price() {
+                return retail_price;
             }
 
-            public void setRetailPrice(Integer retailPrice) {
-                this.retailPrice = retailPrice;
+            public void setRetail_price(String retail_price) {
+                this.retail_price = retail_price;
             }
         }
 
@@ -386,16 +396,16 @@ public class ShouBean {
 
             private Integer id;
             private String name;
-            private String listPicUrl;
-            private Integer retailPrice;
-            private String goodsBrief;
+            private String list_pic_url;
+            private String retail_price;
+            private String goods_brief;
 
-            public HotGoodsListDTO(Integer id, String name, String listPicUrl, Integer retailPrice, String goodsBrief) {
+            public HotGoodsListDTO(Integer id, String name, String listPicUrl, String retailPrice, String goodsBrief) {
                 this.id = id;
                 this.name = name;
-                this.listPicUrl = listPicUrl;
-                this.retailPrice = retailPrice;
-                this.goodsBrief = goodsBrief;
+                this.list_pic_url = listPicUrl;
+                this.retail_price = retailPrice;
+                this.goods_brief = goodsBrief;
             }
 
             public Integer getId() {
@@ -414,28 +424,28 @@ public class ShouBean {
                 this.name = name;
             }
 
-            public String getListPicUrl() {
-                return listPicUrl;
+            public String getList_pic_url() {
+                return list_pic_url;
             }
 
-            public void setListPicUrl(String listPicUrl) {
-                this.listPicUrl = listPicUrl;
+            public void setList_pic_url(String list_pic_url) {
+                this.list_pic_url = list_pic_url;
             }
 
-            public Integer getRetailPrice() {
-                return retailPrice;
+            public String getRetail_price() {
+                return retail_price;
             }
 
-            public void setRetailPrice(Integer retailPrice) {
-                this.retailPrice = retailPrice;
+            public void setRetail_price(String retail_price) {
+                this.retail_price = retail_price;
             }
 
-            public String getGoodsBrief() {
-                return goodsBrief;
+            public String getGoods_brief() {
+                return goods_brief;
             }
 
-            public void setGoodsBrief(String goodsBrief) {
-                this.goodsBrief = goodsBrief;
+            public void setGoods_brief(String goods_brief) {
+                this.goods_brief = goods_brief;
             }
         }
 
@@ -458,6 +468,7 @@ public class ShouBean {
              * new_sort_order : 1
              */
 
+
             private Integer id;
             private String name;
             private String listPicUrl;
@@ -465,13 +476,13 @@ public class ShouBean {
             private String picUrl;
             private Integer sortOrder;
             private Integer isShow;
-            private Integer floorPrice;
+            private String floor_price;
             private String appListPicUrl;
             private Integer isNew;
-            private String newPicUrl;
+            private String new_pic_url;
             private Integer newSortOrder;
 
-            public BrandListDTO(Integer id, String name, String listPicUrl, String simpleDesc, String picUrl, Integer sortOrder, Integer isShow, Integer floorPrice, String appListPicUrl, Integer isNew, String newPicUrl, Integer newSortOrder) {
+            public BrandListDTO(Integer id, String name, String listPicUrl, String simpleDesc, String picUrl, Integer sortOrder, Integer isShow, String floorPrice, String appListPicUrl, Integer isNew, String newPicUrl, Integer newSortOrder) {
                 this.id = id;
                 this.name = name;
                 this.listPicUrl = listPicUrl;
@@ -479,10 +490,10 @@ public class ShouBean {
                 this.picUrl = picUrl;
                 this.sortOrder = sortOrder;
                 this.isShow = isShow;
-                this.floorPrice = floorPrice;
+                this.floor_price = floorPrice;
                 this.appListPicUrl = appListPicUrl;
                 this.isNew = isNew;
-                this.newPicUrl = newPicUrl;
+                this.new_pic_url = newPicUrl;
                 this.newSortOrder = newSortOrder;
             }
 
@@ -542,12 +553,12 @@ public class ShouBean {
                 this.isShow = isShow;
             }
 
-            public Integer getFloorPrice() {
-                return floorPrice;
+            public String getFloor_price() {
+                return floor_price;
             }
 
-            public void setFloorPrice(Integer floorPrice) {
-                this.floorPrice = floorPrice;
+            public void setFloor_price(String floor_price) {
+                this.floor_price = floor_price;
             }
 
             public String getAppListPicUrl() {
@@ -566,12 +577,13 @@ public class ShouBean {
                 this.isNew = isNew;
             }
 
-            public String getNewPicUrl() {
-                return newPicUrl;
+
+            public String getNew_pic_url() {
+                return new_pic_url;
             }
 
-            public void setNewPicUrl(String newPicUrl) {
-                this.newPicUrl = newPicUrl;
+            public void setNew_pic_url(String new_pic_url) {
+                this.new_pic_url = new_pic_url;
             }
 
             public Integer getNewSortOrder() {
@@ -614,15 +626,15 @@ public class ShouBean {
             private String itemPicUrl;
             private String subtitle;
             private Integer topicCategoryId;
-            private Integer priceInfo;
+            private String price_info;
             private String readCount;
-            private String scenePicUrl;
+            private String scene_pic_url;
             private Integer topicTemplateId;
             private Integer topicTagId;
             private Integer sortOrder;
             private Integer isShow;
 
-            public TopicListDTO(Integer id, String title, String content, String avatar, String itemPicUrl, String subtitle, Integer topicCategoryId, Integer priceInfo, String readCount, String scenePicUrl, Integer topicTemplateId, Integer topicTagId, Integer sortOrder, Integer isShow) {
+            public TopicListDTO(Integer id, String title, String content, String avatar, String itemPicUrl, String subtitle, Integer topicCategoryId, String priceInfo, String readCount, String scenePicUrl, Integer topicTemplateId, Integer topicTagId, Integer sortOrder, Integer isShow) {
                 this.id = id;
                 this.title = title;
                 this.content = content;
@@ -630,9 +642,9 @@ public class ShouBean {
                 this.itemPicUrl = itemPicUrl;
                 this.subtitle = subtitle;
                 this.topicCategoryId = topicCategoryId;
-                this.priceInfo = priceInfo;
+                this.price_info = priceInfo;
                 this.readCount = readCount;
-                this.scenePicUrl = scenePicUrl;
+                this.scene_pic_url = scenePicUrl;
                 this.topicTemplateId = topicTemplateId;
                 this.topicTagId = topicTagId;
                 this.sortOrder = sortOrder;
@@ -695,12 +707,12 @@ public class ShouBean {
                 this.topicCategoryId = topicCategoryId;
             }
 
-            public Integer getPriceInfo() {
-                return priceInfo;
+            public String getPrice_info() {
+                return price_info;
             }
 
-            public void setPriceInfo(Integer priceInfo) {
-                this.priceInfo = priceInfo;
+            public void setPrice_info(String price_info) {
+                this.price_info = price_info;
             }
 
             public String getReadCount() {
@@ -711,12 +723,12 @@ public class ShouBean {
                 this.readCount = readCount;
             }
 
-            public String getScenePicUrl() {
-                return scenePicUrl;
+            public String getScene_pic_url() {
+                return scene_pic_url;
             }
 
-            public void setScenePicUrl(String scenePicUrl) {
-                this.scenePicUrl = scenePicUrl;
+            public void setScene_pic_url(String scene_pic_url) {
+                this.scene_pic_url = scene_pic_url;
             }
 
             public Integer getTopicTemplateId() {
@@ -804,14 +816,14 @@ public class ShouBean {
 
                 private Integer id;
                 private String name;
-                private String listPicUrl;
-                private Integer retailPrice;
+                private String list_pic_url;
+                private String retail_price;
 
-                public GoodsListDTO(Integer id, String name, String listPicUrl, Integer retailPrice) {
+                public GoodsListDTO(Integer id, String name, String listPicUrl, String retailPrice) {
                     this.id = id;
                     this.name = name;
-                    this.listPicUrl = listPicUrl;
-                    this.retailPrice = retailPrice;
+                    this.list_pic_url = listPicUrl;
+                    this.retail_price = retailPrice;
                 }
 
                 public Integer getId() {
@@ -830,20 +842,20 @@ public class ShouBean {
                     this.name = name;
                 }
 
-                public String getListPicUrl() {
-                    return listPicUrl;
+                public String getList_pic_url() {
+                    return list_pic_url;
                 }
 
-                public void setListPicUrl(String listPicUrl) {
-                    this.listPicUrl = listPicUrl;
+                public void setList_pic_url(String list_pic_url) {
+                    this.list_pic_url = list_pic_url;
                 }
 
-                public Integer getRetailPrice() {
-                    return retailPrice;
+                public String getRetail_price() {
+                    return retail_price;
                 }
 
-                public void setRetailPrice(Integer retailPrice) {
-                    this.retailPrice = retailPrice;
+                public void setRetail_price(String retail_price) {
+                    this.retail_price = retail_price;
                 }
             }
         }

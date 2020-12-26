@@ -15,11 +15,11 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.example.p7project.R;
 
 
-public class LinerAdapter extends DelegateAdapter.Adapter {
+public class LinerAdapterPerson extends DelegateAdapter.Adapter {
     private Context context;
     private LinearLayoutHelper linearLayoutHelper;
 
-    public LinerAdapter(Context context, LinearLayoutHelper linearLayoutHelper) {
+    public LinerAdapterPerson(Context context, LinearLayoutHelper linearLayoutHelper) {
         this.context = context;
         this.linearLayoutHelper = linearLayoutHelper;
     }
@@ -39,7 +39,7 @@ public class LinerAdapter extends DelegateAdapter.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder= (ViewHolder) holder;
-        viewHolder.title.setText("品牌制造商直供");
+        viewHolder.title.setText("人气推荐");
     }
 
     @Override

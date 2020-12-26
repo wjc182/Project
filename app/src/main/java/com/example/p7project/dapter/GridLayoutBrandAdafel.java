@@ -17,15 +17,14 @@ import com.bumptech.glide.Glide;
 import com.example.p7project.R;
 import com.example.p7project.bean.ShouBean;
 
-
 import java.util.ArrayList;
 
-public class GridLayoutHelperAdafel extends DelegateAdapter.Adapter {
+public class GridLayoutBrandAdafel extends DelegateAdapter.Adapter {
     private Context context;
     private ArrayList<ShouBean.DataDTO.ChannelDTO> list;
     private GridLayoutHelper gridLayoutHelper;
 
-    public GridLayoutHelperAdafel(Context context, ArrayList<ShouBean.DataDTO.ChannelDTO> list, GridLayoutHelper gridLayoutHelper) {
+    public GridLayoutBrandAdafel(Context context, ArrayList<ShouBean.DataDTO.ChannelDTO> list, GridLayoutHelper gridLayoutHelper) {
         this.context = context;
         this.list = list;
         this.gridLayoutHelper = gridLayoutHelper;

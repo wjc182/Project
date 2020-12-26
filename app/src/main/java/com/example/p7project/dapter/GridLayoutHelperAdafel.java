@@ -22,14 +22,17 @@ import java.util.ArrayList;
 
 public class GridLayoutHelperAdafel extends DelegateAdapter.Adapter {
     private Context context;
-    private ArrayList<ShouBean.DataDTO.ChannelDTO> list;
+    private ArrayList<ShouBean.DataDTO.BrandListDTO> list;
     private GridLayoutHelper gridLayoutHelper;
 
-    public GridLayoutHelperAdafel(Context context, ArrayList<ShouBean.DataDTO.ChannelDTO> list, GridLayoutHelper gridLayoutHelper) {
+    public GridLayoutHelperAdafel(Context context, ArrayList<ShouBean.DataDTO.BrandListDTO> list, GridLayoutHelper gridLayoutHelper) {
         this.context = context;
         this.list = list;
         this.gridLayoutHelper = gridLayoutHelper;
     }
+
+
+
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
@@ -39,17 +42,21 @@ public class GridLayoutHelperAdafel extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.grild_item, parent, false);
-        
-        return new ViewHolder(inflate);
+           View inflate = LayoutInflater.from(context).inflate(R.layout.grild_item1, parent, false);
+
+           return new ViewHolder(inflate);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ShouBean.DataDTO.ChannelDTO channelDTO = list.get(position);
-        ViewHolder viewHolder= (ViewHolder) holder;
-        viewHolder.name.setText(channelDTO.getName());
-        Glide.with(context).load(channelDTO.geticon_url()).into(viewHolder.image);
+
+            ShouBean.DataDTO.BrandListDTO brandListDTO = list.get(position);
+            ViewHolder viewHolder= (ViewHolder) holder;
+            viewHolder.price.setText(brandListDTO.getFloor_price()+"元起");
+            viewHolder.name.setText(brandListDTO.getName());
+            Glide.with(context).load(brandListDTO.getNew_pic_url() ).into(viewHolder.image);
+
     }
 
     @Override
@@ -61,10 +68,13 @@ public class GridLayoutHelperAdafel extends DelegateAdapter.Adapter {
 
         private ImageView image;
         private TextView name;
+        private TextView price;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image=itemView.findViewById(R.id.home_icon);
-            name=itemView.findViewById(R.id.home_name);
+            image=itemView.findViewById(R.id.brand_image);
+            name=itemView.findViewById(R.id.brand_shop);
+            price=itemView.findViewById(R.id.brand_price);
         }
     }
+
 }

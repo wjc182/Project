@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-<ImageView
-    android:layout_width="30dp"
-    android:layout_height="30dp"
-    android:id="@+id/home_icon"
-    />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/brand_image"
+        />
+
     <TextView
-        android:layout_marginTop="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/brand_shop"
+        android:textSize="15sp"
+
+        />
+    <TextView
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:textSize="16sp"
-        android:id="@+id/home_name"
+        android:textSize="10sp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/brand_price"
         />
 </RelativeLayout>
