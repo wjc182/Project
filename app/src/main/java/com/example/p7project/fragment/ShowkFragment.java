@@ -59,11 +59,12 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
     private GridLayoutHelperPeson gridLayoutHelperPeson;
     private LinerAdapterPerson linerAdapterPerson;
     private LinerAdapterTopic linerAdapterTopic;
-    private ArrayList<ShouBean.DataDTO.TopicListDTO> topicListDTOS;
-    private LinerAdapterTopics topics;
+
     private LinerHomeAdapter linerHomeAdapter;
     private ArrayList<ShouBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsListDTOS;
     private GridLayoutHomeAdafel gridLayoutHomeAdafel;
+    private ArrayList<ShouBean.DataDTO.TopicListDTO> topicListDTOS1;
+    private LinerAdapterTopics linerAdapterTopics;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,6 +104,7 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         bannerDTOS = new ArrayList<>();
         //通栏适配器
         singleLayoutAdapter = new SingleLayoutAdapter(bannerDTOS, activity, singleLayoutHelper);
+
         //配件
         peiJian();
         //品牌制造商提供
@@ -117,13 +119,15 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         PersonPush();
         //人气
         person();
+        //专题标题
         topicTitle();
         //专题
         topic();
         //home
         home();
         //居家
-       homeImp();
+        homeImp();
+
         //总的适配器
         DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         //设置适配器
@@ -136,7 +140,7 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         delegateAdapter.addAdapter(linerAdapterPerson);
         delegateAdapter.addAdapter(gridLayoutHelperPeson);
         delegateAdapter.addAdapter(linerAdapterTopic);
-        delegateAdapter.addAdapter(topics);
+        delegateAdapter.addAdapter(linerAdapterTopics);
         delegateAdapter.addAdapter(linerHomeAdapter);
         delegateAdapter.addAdapter(gridLayoutHomeAdafel);
 
@@ -177,6 +181,7 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         // linearLayoutHelper特有属性
         linearLayoutHelper.setDividerHeight(1); // 设置每行Item的距离
         linerHomeAdapter = new LinerHomeAdapter(activity, linearLayoutHelper);
+
     }
 
     private void topicTitle() {
@@ -207,11 +212,15 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         linearLayoutHelper.setPadding(10,10,10,10);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
         linearLayoutHelper.setMargin(10,10,10,10);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
         linearLayoutHelper.setBgColor(Color.WHITE);// 设置背景颜色
-        linearLayoutHelper.setAspectRatio(2);// 设置设置布局内每行布局的宽与高的比
+        linearLayoutHelper.setAspectRatio(3);// 设置设置布局内每行布局的宽与高的比
         // linearLayoutHelper特有属性
         linearLayoutHelper.setDividerHeight(1); // 设置每行Item的距离
-        topicListDTOS = new ArrayList<>();
-        topics = new LinerAdapterTopics(activity, linearLayoutHelper, topicListDTOS);
+        topicListDTOS1=new ArrayList<>();
+        RecyclerView.RecycledViewPool recycledViewPool = rec.getRecycledViewPool();
+        linerAdapterTopics= new LinerAdapterTopics(activity,topicListDTOS1,linearLayoutHelper,recycledViewPool);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
+//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        rec.setLayoutManager(linearLayoutManager);
     }
 
     private void peiJian() {
@@ -269,8 +278,10 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         gridLayoutHelper3.setHGap(20);// 控制子元素之间的水平间距
         gridLayoutHelper3.setAutoExpand(false);//是否自动填充空白区域
         gridLayoutHelper3.setSpanCount(1);// 设置每行多少个网格
+
         hotGoodsListDTOS = new ArrayList<>();
         gridLayoutHelperPeson = new GridLayoutHelperPeson(activity, hotGoodsListDTOS, gridLayoutHelper3);
+
     }
 
     private void weekOne() {
@@ -350,35 +361,33 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
     //banner
     @Override
     public void Ok(ShouBean shouBean) {
-
+        //banner
         List<ShouBean.DataDTO.BannerDTO> banner = shouBean.getData().getBanner();
         bannerDTOS.addAll(banner);
         singleLayoutAdapter.notifyDataSetChanged();
-
+        //配件
         List<ShouBean.DataDTO.ChannelDTO> channel = shouBean.getData().getChannel();
         channelDTOS.addAll(channel);
         gridLayoutHelperAdafel.notifyDataSetChanged();
-
+        //品牌
         List<ShouBean.DataDTO.BrandListDTO> brandList = shouBean.getData().getBrandList();
         brandListDTOS.addAll(brandList);
         gridLayoutHelperAdafel1.notifyDataSetChanged();
-
+        //新品
         List<ShouBean.DataDTO.NewGoodsListDTO> newGoodsList = shouBean.getData().getNewGoodsList();
         newGoodsListDTOS.addAll(newGoodsList);
         gridLayoutHelperWeek.notifyDataSetChanged();
-
+        //人气推荐
         List<ShouBean.DataDTO.HotGoodsListDTO> hotGoodsList = shouBean.getData().getHotGoodsList();
         hotGoodsListDTOS.addAll(hotGoodsList);
         gridLayoutHelperPeson.notifyDataSetChanged();
-
+        //专题精选
         List<ShouBean.DataDTO.TopicListDTO> topicList = shouBean.getData().getTopicList();
-        topicListDTOS.addAll(topicList);
-        topics.notifyDataSetChanged();
-
-        for (int i = 0; i < shouBean.getData().getCategoryList().size(); i++) {
-            List<ShouBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsList = shouBean.getData().getCategoryList().get(i).getGoodsList();
-            goodsListDTOS.addAll(goodsList);
-        }
+        topicListDTOS1.addAll(topicList);
+        linerAdapterTopics.notifyDataSetChanged();
+        //居家
+        List<ShouBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsList = shouBean.getData().getCategoryList().get(0).getGoodsList();
+        goodsListDTOS.addAll(goodsList);
         gridLayoutHomeAdafel.notifyDataSetChanged();
 
     }
