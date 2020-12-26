@@ -48,6 +48,19 @@ public class LinerAdapterTopics extends DelegateAdapter.Adapter{
         return new ViewHolder(view);
     }
 
+    private ItemListener itemListener;
+
+    public void setItemListener(ItemListener itemListener) {
+        this.itemListener = itemListener;
+    }
+
+    public ItemListener getItemListener() {
+        return itemListener;
+    }
+
+    public interface ItemListener{
+        void itemClick(int  pos);
+    }
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(holder.itemView instanceof  RecyclerView){
@@ -60,6 +73,12 @@ public class LinerAdapterTopics extends DelegateAdapter.Adapter{
         viewHolder.pice.setText(topicListDTO.getPrice_info()+"元起");
         viewHolder.title.setText(topicListDTO.getTitle());
         Glide.with(context).load(topicListDTO.getScene_pic_url()).into(viewHolder.image);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemListener.itemClick(position);
+            }
+        });
     }
 
     @Override

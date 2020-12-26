@@ -42,6 +42,19 @@ public class GridLayoutHelperWeek extends DelegateAdapter.Adapter {
         View view = LayoutInflater.from(context).inflate(R.layout.week_item, parent, false);
         return new ViewHolder(view);
     }
+    private ItemListener itemListener;
+
+    public void setItemListener(ItemListener itemListener) {
+        this.itemListener = itemListener;
+    }
+
+    public ItemListener getItemListener() {
+        return itemListener;
+    }
+
+    public interface ItemListener{
+        void itemClick(int  pos);
+    }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
@@ -51,6 +64,14 @@ public class GridLayoutHelperWeek extends DelegateAdapter.Adapter {
         viewHolder.name.setText(listDTO.getName());
         viewHolder.price.setText(listDTO.getRetail_price());
         Glide.with(context).load(listDTO.getList_pic_url()).into(viewHolder.image);
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemListener.itemClick(position);
+            }
+        });
+
     }
 
     @Override

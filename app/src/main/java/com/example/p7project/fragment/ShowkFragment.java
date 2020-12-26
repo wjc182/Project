@@ -1,24 +1,25 @@
 package com.example.p7project.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
-import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
+import com.example.p7project.HomeMainActivity;
 import com.example.p7project.R;
 import com.example.p7project.bean.ShouBean;
 import com.example.p7project.contract.MainContract;
@@ -59,33 +60,32 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
     private GridLayoutHelperPeson gridLayoutHelperPeson;
     private LinerAdapterPerson linerAdapterPerson;
     private LinerAdapterTopic linerAdapterTopic;
-
     private LinerHomeAdapter linerHomeAdapter;
     private ArrayList<ShouBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsListDTOS;
     private GridLayoutHomeAdafel gridLayoutHomeAdafel;
     private ArrayList<ShouBean.DataDTO.TopicListDTO> topicListDTOS1;
     private LinerAdapterTopics linerAdapterTopics;
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_showk, container, false);
-        activity = getActivity();
+        activity=getActivity();
         initView(inflate);
-        iniData();
+        initData();
         return inflate;
     }
 
-    private void iniData() {
+    private void initData() {
         PresneterImp presneterImp = new PresneterImp(this);
         presneterImp.Presenter();
     }
 
+
     private void initView(View inflate) {
-        rec = inflate.findViewById(R.id.rec_show);
         //布局管理
         VirtualLayoutManager virtualLayoutManager = new VirtualLayoutManager(activity);
+        rec=inflate.findViewById(R.id.rec_show);
         rec.setLayoutManager(virtualLayoutManager);
         //组件复用
         RecyclerView.RecycledViewPool recycledViewPool = new RecyclerView.RecycledViewPool();
@@ -127,7 +127,8 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         home();
         //居家
         homeImp();
-
+        //监听事件
+        onListener();
         //总的适配器
         DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         //设置适配器
@@ -145,6 +146,61 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         delegateAdapter.addAdapter(gridLayoutHomeAdafel);
 
         rec.setAdapter(delegateAdapter);
+    }
+
+    private void onListener() {
+        //banner
+        singleLayoutAdapter.setItemListener(new SingleLayoutAdapter.ItemListener() {
+            @Override
+            public void itemClick(int pos) {
+                Intent intent = new Intent(activity, HomeMainActivity.class);
+                startActivity(intent);
+            }
+        });
+        //配件
+        gridLayoutHelperAdafel.setItemListener(new GridLayoutBrandAdafel.ItemListener() {
+            @Override
+            public void itemClick(int pos) {
+                Toast.makeText(activity, "配件跳转未做", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+       //品牌
+        gridLayoutHelperAdafel1.setItemListener(new GridLayoutHelperAdafel.ItemListener() {
+            @Override
+            public void itemClick(int pos) {
+                Toast.makeText(activity, "品牌跳转未做", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+       //week新品首发
+        gridLayoutHelperWeek.setItemListener(new GridLayoutHelperWeek.ItemListener() {
+            @Override
+            public void itemClick(int pos) {
+                Toast.makeText(activity, "新品跳转未做", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //人气推荐
+        gridLayoutHelperPeson.setItemListener(new GridLayoutHelperPeson.ItemListener() {
+            @Override
+            public void itemClick(int pos) {
+                Toast.makeText(activity, "人气推荐未做", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //专题
+        linerAdapterTopics.setItemListener(new LinerAdapterTopics.ItemListener() {
+            @Override
+            public void itemClick(int pos) {
+                Toast.makeText(activity, "专题跳转未做", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //居家
+        gridLayoutHomeAdafel.setItemListener(new GridLayoutHomeAdafel.ItemListener() {
+            @Override
+            public void itemClick(int pos) {
+                Toast.makeText(activity, "居家跳转未做", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void homeImp() {
@@ -199,6 +255,7 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         // linearLayoutHelper特有属性
         linearLayoutHelper.setDividerHeight(1); // 设置每行Item的距离
         linerAdapterTopic = new LinerAdapterTopic(activity, linearLayoutHelper);
+
     }
 
     private void topic() {
@@ -396,4 +453,5 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
     public void no(String error) {
         Log.e("TAG",error);
     }
+
 }

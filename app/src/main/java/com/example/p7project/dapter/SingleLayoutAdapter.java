@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +45,19 @@ public class SingleLayoutAdapter extends DelegateAdapter.Adapter {
 
         return new ViewHolder(view);
     }
+    private ItemListener itemListener;
 
+    public void setItemListener(ItemListener itemListener) {
+        this.itemListener = itemListener;
+    }
+
+    public ItemListener getItemListener() {
+        return itemListener;
+    }
+
+    public interface ItemListener{
+        void itemClick(int  pos);
+ }
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder= (ViewHolder) holder;
@@ -54,8 +67,14 @@ public class SingleLayoutAdapter extends DelegateAdapter.Adapter {
                     public void displayImage(Context context, Object path, ImageView imageView) {
                         ShouBean.DataDTO.BannerDTO newPath= (ShouBean.DataDTO.BannerDTO) path;
                         Log.e("TTT",newPath.toString());
-
                         Glide.with(context).load(newPath.getImageUrl()).into(imageView);
+                        imageView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                               // Toast.makeText(context, newPath.getId()+"", Toast.LENGTH_SHORT).show();
+                                itemListener.itemClick(position);
+                            }
+                        });
                      }
                 }).start();
     }
@@ -72,4 +91,6 @@ public class SingleLayoutAdapter extends DelegateAdapter.Adapter {
             banner=itemView.findViewById(R.id.ban_image);
         }
     }
+
+
 }

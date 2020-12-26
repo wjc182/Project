@@ -43,12 +43,32 @@ public class GridLayoutBrandAdafel extends DelegateAdapter.Adapter {
         return new ViewHolder(inflate);
     }
 
+    private ItemListener itemListener;
+
+    public void setItemListener(ItemListener itemListener) {
+        this.itemListener = itemListener;
+    }
+
+    public ItemListener getItemListener() {
+        return itemListener;
+    }
+
+    public interface ItemListener{
+        void itemClick(int  pos);
+    }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ShouBean.DataDTO.ChannelDTO channelDTO = list.get(position);
         ViewHolder viewHolder= (ViewHolder) holder;
         viewHolder.name.setText(channelDTO.getName());
         Glide.with(context).load(channelDTO.geticon_url()).into(viewHolder.image);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemListener.itemClick(position);
+            }
+        });
     }
 
     @Override

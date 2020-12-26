@@ -39,6 +39,20 @@ public class GridLayoutHelperAdafel extends DelegateAdapter.Adapter {
         return gridLayoutHelper;
     }
 
+    private ItemListener itemListener;
+
+    public void setItemListener(ItemListener itemListener) {
+        this.itemListener = itemListener;
+    }
+
+    public ItemListener getItemListener() {
+        return itemListener;
+    }
+
+    public interface ItemListener{
+        void itemClick(int  pos);
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,6 +70,12 @@ public class GridLayoutHelperAdafel extends DelegateAdapter.Adapter {
             viewHolder.price.setText(brandListDTO.getFloor_price()+"元起");
             viewHolder.name.setText(brandListDTO.getName());
             Glide.with(context).load(brandListDTO.getNew_pic_url() ).into(viewHolder.image);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemListener.itemClick(position);
+            }
+        });
 
     }
 

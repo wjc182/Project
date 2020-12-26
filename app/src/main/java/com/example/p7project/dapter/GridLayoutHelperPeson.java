@@ -43,6 +43,21 @@ public class GridLayoutHelperPeson extends DelegateAdapter.Adapter {
         return new ViewHolder(view);
     }
 
+    private ItemListener itemListener;
+
+    public void setItemListener(ItemListener itemListener) {
+        this.itemListener = itemListener;
+    }
+
+    public ItemListener getItemListener() {
+        return itemListener;
+    }
+
+    public interface ItemListener{
+        void itemClick(int  pos);
+    }
+
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
          ViewHolder viewHolder= (ViewHolder) holder;
@@ -51,6 +66,12 @@ public class GridLayoutHelperPeson extends DelegateAdapter.Adapter {
         viewHolder.name.setText(hotGoodsListDTO.getName());
         viewHolder.price.setText("￥"+hotGoodsListDTO.getRetail_price());
         Glide.with(context).load(hotGoodsListDTO.getList_pic_url()).into(viewHolder.image);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemListener.itemClick(position);
+            }
+        });
     }
 
     @Override

@@ -42,6 +42,19 @@ public class GridLayoutHomeAdafel extends DelegateAdapter.Adapter {
         
         return new ViewHolder(inflate);
     }
+    private ItemListener itemListener;
+
+    public void setItemListener(ItemListener itemListener) {
+        this.itemListener = itemListener;
+    }
+
+    public ItemListener getItemListener() {
+        return itemListener;
+    }
+
+    public interface ItemListener{
+        void itemClick(int  pos);
+    }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
@@ -50,6 +63,12 @@ public class GridLayoutHomeAdafel extends DelegateAdapter.Adapter {
         viewHolder.name.setText(goodsListDTO.getName());
         viewHolder.price.setText("￥"+goodsListDTO.getRetail_price());
         Glide.with(context).load(goodsListDTO.getList_pic_url()).into(viewHolder.image);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemListener.itemClick(position);
+            }
+        });
     }
 
     @Override
