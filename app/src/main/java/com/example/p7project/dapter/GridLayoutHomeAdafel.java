@@ -38,7 +38,7 @@ public class GridLayoutHomeAdafel extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.week_item, parent, false);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.week_item1, parent, false);
         
         return new ViewHolder(inflate);
     }
@@ -81,11 +81,13 @@ public class GridLayoutHomeAdafel extends DelegateAdapter.Adapter {
         private ImageView image;
         private TextView name;
         private TextView price;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image=itemView.findViewById(R.id.week_image);
-            name=itemView.findViewById(R.id.week_shop);
-            price=itemView.findViewById(R.id.week_price);
+            image=itemView.findViewById(R.id.week_image1);
+            name=itemView.findViewById(R.id.week_shop1);
+            price=itemView.findViewById(R.id.week_price1);
+
         }
     }
 }

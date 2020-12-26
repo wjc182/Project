@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
+import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.bumptech.glide.Glide;
 import com.example.p7project.R;
@@ -24,15 +25,15 @@ import java.util.ArrayList;
 public class LinerAdapterTopics extends DelegateAdapter.Adapter{
     private Context context;
     private ArrayList<ShouBean.DataDTO.TopicListDTO> list;
-    private   LinearLayoutHelper linearLayoutHelper;
+    private GridLayoutHelper gridLayoutHelper;
     private int xOffset;
     private int position;
     private RecyclerView.RecycledViewPool viewPool;
 
-    public LinerAdapterTopics(Context context, ArrayList<ShouBean.DataDTO.TopicListDTO> list, LinearLayoutHelper linearLayoutHelper,RecyclerView.RecycledViewPool viewPool) {
+    public LinerAdapterTopics(Context context, ArrayList<ShouBean.DataDTO.TopicListDTO> list, GridLayoutHelper gridLayoutHelper,RecyclerView.RecycledViewPool viewPool) {
         this.context = context;
         this.list = list;
-        this.linearLayoutHelper = linearLayoutHelper;
+        this.gridLayoutHelper = gridLayoutHelper;
         this.viewPool=viewPool;
     }
 
@@ -88,7 +89,7 @@ public class LinerAdapterTopics extends DelegateAdapter.Adapter{
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
-        return linearLayoutHelper;
+        return gridLayoutHelper;
     }
 
 

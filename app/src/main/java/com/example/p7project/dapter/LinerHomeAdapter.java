@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,15 +14,20 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.example.p7project.R;
+import com.example.p7project.bean.ShouBean;
+
+import java.util.ArrayList;
 
 
 public class LinerHomeAdapter extends DelegateAdapter.Adapter {
     private Context context;
     private LinearLayoutHelper linearLayoutHelper;
+    private ArrayList<ShouBean.DataDTO.CategoryListDTO> list;
 
-    public LinerHomeAdapter(Context context, LinearLayoutHelper linearLayoutHelper) {
+    public LinerHomeAdapter(Context context, LinearLayoutHelper linearLayoutHelper, ArrayList<ShouBean.DataDTO.CategoryListDTO> list) {
         this.context = context;
         this.linearLayoutHelper = linearLayoutHelper;
+        this.list = list;
     }
 
     @Override
@@ -32,27 +38,29 @@ public class LinerHomeAdapter extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.branch_title, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.home_title, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder= (ViewHolder) holder;
-        viewHolder.title.setText("居家");
+        ShouBean.DataDTO.CategoryListDTO categoryListDTO = list.get(position);
+        viewHolder.title.setText(categoryListDTO.getName());
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return list.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView title;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title=itemView.findViewById(R.id.brand_title);
+            title=itemView.findViewById(R.id.home_titles);
         }
     }
 }

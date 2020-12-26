@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -65,6 +67,8 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
     private GridLayoutHomeAdafel gridLayoutHomeAdafel;
     private ArrayList<ShouBean.DataDTO.TopicListDTO> topicListDTOS1;
     private LinerAdapterTopics linerAdapterTopics;
+    private RecyclerView.RecycledViewPool recycledViewPool;
+    private ArrayList<ShouBean.DataDTO.CategoryListDTO> categoryListDTOS;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -88,14 +92,16 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         rec=inflate.findViewById(R.id.rec_show);
         rec.setLayoutManager(virtualLayoutManager);
         //组件复用
-        RecyclerView.RecycledViewPool recycledViewPool = new RecyclerView.RecycledViewPool();
+        recycledViewPool = new RecyclerView.RecycledViewPool();
         rec.setRecycledViewPool(recycledViewPool);
         recycledViewPool.setMaxRecycledViews(0,10);
+
+        rec.addItemDecoration(new DividerItemDecoration(activity,DividerItemDecoration.VERTICAL));
 
         //banner通栏布局
         singleLayoutHelper = new SingleLayoutHelper();
         // 公共属性
-//        singleLayoutHelper.setItemCount(1);// 设置布局里Item个数
+      singleLayoutHelper.setItemCount(1);// 设置布局里Item个数
         singleLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
         singleLayoutHelper.setMargin(20, 20, 20, 20);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
         singleLayoutHelper.setBgColor(Color.WHITE);// 设置背景颜色
@@ -235,8 +241,10 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         linearLayoutHelper.setBgColor(Color.WHITE);// 设置背景颜色
         linearLayoutHelper.setAspectRatio(6);// 设置设置布局内每行布局的宽与高的比
         // linearLayoutHelper特有属性
-        linearLayoutHelper.setDividerHeight(1); // 设置每行Item的距离
-        linerHomeAdapter = new LinerHomeAdapter(activity, linearLayoutHelper);
+        linearLayoutHelper.setDividerHeight(1);
+        categoryListDTOS = new ArrayList<>();
+        // 设置每行Item的距离
+        linerHomeAdapter = new LinerHomeAdapter(activity, linearLayoutHelper,categoryListDTOS);
 
     }
 
@@ -260,24 +268,26 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
 
     private void topic() {
         /**
-         设置线性布局
+         设置Grid布局
          */
-        LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-        // 创建对应的LayoutHelper对象
-        // 所有布局的公共属性（属性会在下面详细说明）
-        linearLayoutHelper.setItemCount(1);// 设置布局里Item个数
-        linearLayoutHelper.setPadding(10,10,10,10);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
-        linearLayoutHelper.setMargin(10,10,10,10);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
-        linearLayoutHelper.setBgColor(Color.WHITE);// 设置背景颜色
-        linearLayoutHelper.setAspectRatio(3);// 设置设置布局内每行布局的宽与高的比
-        // linearLayoutHelper特有属性
-        linearLayoutHelper.setDividerHeight(1); // 设置每行Item的距离
+        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(3);
+        // 在构造函数设置每行的网格个数
+        // 公共属性
+        gridLayoutHelper.setItemCount(3);// 设置布局里Item个数
+        gridLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
+        gridLayoutHelper.setMargin(20, 20, 20, 20);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
+        gridLayoutHelper.setBgColor(Color.WHITE);// 设置背景颜色
+        gridLayoutHelper.setAspectRatio(1.5f);// 设置设置布局内每行布局的宽与高的比
+        // gridLayoutHelper特有属性（下面会详细说明）
+        gridLayoutHelper.setWeights(new float[]{33,33,33});//设置每行中 每个网格宽度 占 每行总宽度 的比例
+        gridLayoutHelper.setVGap(20);// 控制子元素之间的垂直间距
+        gridLayoutHelper.setHGap(20);// 控制子元素之间的水平间距
+        gridLayoutHelper.setAutoExpand(true);//是否自动填充空白区域
+        gridLayoutHelper.setSpanCount(3);// 设置每行多少个网格
+
         topicListDTOS1=new ArrayList<>();
-        RecyclerView.RecycledViewPool recycledViewPool = rec.getRecycledViewPool();
-        linerAdapterTopics= new LinerAdapterTopics(activity,topicListDTOS1,linearLayoutHelper,recycledViewPool);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
-//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        rec.setLayoutManager(linearLayoutManager);
+        linerAdapterTopics= new LinerAdapterTopics(activity,topicListDTOS1,gridLayoutHelper,recycledViewPool);
+
     }
 
     private void peiJian() {
@@ -442,16 +452,21 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         List<ShouBean.DataDTO.TopicListDTO> topicList = shouBean.getData().getTopicList();
         topicListDTOS1.addAll(topicList);
         linerAdapterTopics.notifyDataSetChanged();
-        //居家
-        List<ShouBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsList = shouBean.getData().getCategoryList().get(0).getGoodsList();
-        goodsListDTOS.addAll(goodsList);
-        gridLayoutHomeAdafel.notifyDataSetChanged();
 
+        List<ShouBean.DataDTO.CategoryListDTO> categoryList = shouBean.getData().getCategoryList();
+        categoryListDTOS.addAll(categoryList);
+        linerHomeAdapter.notifyDataSetChanged();
+
+        //居家
+        for (int i = 0; i < shouBean.getData().getCategoryList().size(); i++) {
+            List<ShouBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsList = shouBean.getData().getCategoryList().get(i).getGoodsList();
+            goodsListDTOS.addAll(goodsList);
+            gridLayoutHomeAdafel.notifyDataSetChanged();
+        }
     }
 
     @Override
     public void no(String error) {
         Log.e("TAG",error);
     }
-
 }
