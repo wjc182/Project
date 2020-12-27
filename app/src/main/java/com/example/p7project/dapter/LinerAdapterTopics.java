@@ -52,7 +52,6 @@ public class LinerAdapterTopics extends DelegateAdapter.Adapter{
         ViewHolder viewHolder= (ViewHolder) holder;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
         viewHolder.recyclerView.setLayoutManager(linearLayoutManager);
         viewHolder.recyclerView.setAdapter(recAdapter);
 

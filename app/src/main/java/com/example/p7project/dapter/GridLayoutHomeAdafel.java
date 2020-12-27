@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
@@ -18,16 +20,18 @@ import com.example.p7project.R;
 import com.example.p7project.bean.ShouBean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GridLayoutHomeAdafel extends DelegateAdapter.Adapter {
     private Context context;
-    private ArrayList<ShouBean.DataDTO.CategoryListDTO.GoodsListDTO> list;
     private GridLayoutHelper gridLayoutHelper;
+    private ArrayList<ShouBean.DataDTO.CategoryListDTO> list;
+    private RewAdapter rewAdapter;
 
-    public GridLayoutHomeAdafel(Context context, ArrayList<ShouBean.DataDTO.CategoryListDTO.GoodsListDTO> list, GridLayoutHelper gridLayoutHelper) {
+    public GridLayoutHomeAdafel(Context context, GridLayoutHelper gridLayoutHelper, ArrayList<ShouBean.DataDTO.CategoryListDTO> list) {
         this.context = context;
-        this.list = list;
         this.gridLayoutHelper = gridLayoutHelper;
+        this.list = list;
     }
 
     @Override
@@ -38,19 +42,17 @@ public class GridLayoutHomeAdafel extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.week_item1, parent, false);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.rew_item, parent, false);
         
         return new ViewHolder(inflate);
     }
+
     private ItemListener itemListener;
 
     public void setItemListener(ItemListener itemListener) {
         this.itemListener = itemListener;
     }
 
-    public ItemListener getItemListener() {
-        return itemListener;
-    }
 
     public interface ItemListener{
         void itemClick(int  pos);
@@ -58,11 +60,15 @@ public class GridLayoutHomeAdafel extends DelegateAdapter.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ShouBean.DataDTO.CategoryListDTO.GoodsListDTO goodsListDTO = list.get(position);
+        ShouBean.DataDTO.CategoryListDTO categoryListDTO = list.get(position);
         ViewHolder viewHolder= (ViewHolder) holder;
-        viewHolder.name.setText(goodsListDTO.getName());
-        viewHolder.price.setText("￥"+goodsListDTO.getRetail_price());
-        Glide.with(context).load(goodsListDTO.getList_pic_url()).into(viewHolder.image);
+        viewHolder.name.setText(categoryListDTO.getName());
+
+        viewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context,2));
+        ArrayList<ShouBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsList = (ArrayList<ShouBean.DataDTO.CategoryListDTO.GoodsListDTO>) categoryListDTO.getGoodsList();
+        rewAdapter=new RewAdapter(goodsList,context);
+
+        viewHolder.recyclerView.setAdapter(rewAdapter);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,17 +83,12 @@ public class GridLayoutHomeAdafel extends DelegateAdapter.Adapter {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-
-        private ImageView image;
+        private RecyclerView recyclerView;
         private TextView name;
-        private TextView price;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image=itemView.findViewById(R.id.week_image1);
-            name=itemView.findViewById(R.id.week_shop1);
-            price=itemView.findViewById(R.id.week_price1);
-
+            recyclerView=itemView.findViewById(R.id.rec_rec);
+            name=itemView.findViewById(R.id.text_name);
         }
     }
 }

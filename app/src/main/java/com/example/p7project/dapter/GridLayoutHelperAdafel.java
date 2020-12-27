@@ -45,9 +45,6 @@ public class GridLayoutHelperAdafel extends DelegateAdapter.Adapter {
         this.itemListener = itemListener;
     }
 
-    public ItemListener getItemListener() {
-        return itemListener;
-    }
 
     public interface ItemListener{
         void itemClick(int  pos);
@@ -64,19 +61,18 @@ public class GridLayoutHelperAdafel extends DelegateAdapter.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
             ShouBean.DataDTO.BrandListDTO brandListDTO = list.get(position);
             ViewHolder viewHolder= (ViewHolder) holder;
             viewHolder.price.setText(brandListDTO.getFloor_price()+"元起");
             viewHolder.name.setText(brandListDTO.getName());
             Glide.with(context).load(brandListDTO.getNew_pic_url() ).into(viewHolder.image);
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            //监听事件
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 itemListener.itemClick(position);
             }
         });
-
     }
 
     @Override
