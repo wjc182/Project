@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/topic_image"
-        android:layout_width="100dp"
-        android:scaleType="centerCrop"
-        android:layout_height="100dp" />
-
-    <TextView
-        android:id="@+id/topic_ai"
         android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="#070606"
+        android:scaleType="center"
+        android:layout_height="200dp" />
+        <TextView
+            app:layout_constraintTop_toBottomOf="@id/topic_image"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/topic_ai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#070606" />
 
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/topic_price"
-        android:textSize="10sp"
-        android:layout_width="wrap_content"
-        android:textColor="#CA0522"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/topic_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#CA0522"
+            app:layout_constraintTop_toBottomOf="@id/topic_image"
+            app:layout_constraintLeft_toRightOf="@id/topic_ai"
+             />
 
-    <TextView
-        android:id="@+id/topic_topic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/topic_topic"
+            app:layout_constraintTop_toBottomOf="@id/topic_ai"
+          app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+</androidx.constraintlayout.widget.ConstraintLayout>

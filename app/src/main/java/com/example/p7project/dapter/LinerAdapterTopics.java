@@ -24,114 +24,53 @@ import java.util.ArrayList;
 
 public class LinerAdapterTopics extends DelegateAdapter.Adapter{
     private Context context;
-    private ArrayList<ShouBean.DataDTO.TopicListDTO> list;
-    private GridLayoutHelper gridLayoutHelper;
-    private int xOffset;
-    private int position;
-    private RecyclerView.RecycledViewPool viewPool;
+    private LinearLayoutHelper linearLayoutHelper;
+    private RecAdapter recAdapter;
 
-    public LinerAdapterTopics(Context context, ArrayList<ShouBean.DataDTO.TopicListDTO> list, GridLayoutHelper gridLayoutHelper,RecyclerView.RecycledViewPool viewPool) {
+    public LinerAdapterTopics(Context context, LinearLayoutHelper linearLayoutHelper, RecAdapter recAdapter) {
         this.context = context;
-        this.list = list;
-        this.gridLayoutHelper = gridLayoutHelper;
-        this.viewPool=viewPool;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return 3;
-    }
-
-    @NonNull
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.topic_item, parent, false);
-        return new ViewHolder(view);
-    }
-
-    private ItemListener itemListener;
-
-    public void setItemListener(ItemListener itemListener) {
-        this.itemListener = itemListener;
-    }
-
-    public ItemListener getItemListener() {
-        return itemListener;
-    }
-
-    public interface ItemListener{
-        void itemClick(int  pos);
-    }
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(holder.itemView instanceof  RecyclerView){
-            RecyclerView recyclerView= (RecyclerView) holder.itemView;
-            recyclerView.setRecycledViewPool(viewPool);
-        }
-        ViewHolder viewHolder= (ViewHolder) holder;
-        ShouBean.DataDTO.TopicListDTO topicListDTO = list.get(position);
-        viewHolder.topic.setText(topicListDTO.getSubtitle());
-        viewHolder.pice.setText(topicListDTO.getPrice_info()+"元起");
-        viewHolder.title.setText(topicListDTO.getTitle());
-        Glide.with(context).load(topicListDTO.getScene_pic_url()).into(viewHolder.image);
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemListener.itemClick(position);
-            }
-        });
-    }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
+        this.linearLayoutHelper = linearLayoutHelper;
+        this.recAdapter = recAdapter;
     }
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
-        return gridLayoutHelper;
+        return linearLayoutHelper;
+    }
+
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.rew_item, parent, false);
+
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ViewHolder viewHolder= (ViewHolder) holder;
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        viewHolder.recyclerView.setLayoutManager(linearLayoutManager);
+        viewHolder.recyclerView.setAdapter(recAdapter);
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 1;
     }
 
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView title;
-        private TextView pice;
-        private ImageView image;
-        private TextView topic;
+        private RecyclerView recyclerView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title=itemView.findViewById(R.id.topic_ai);
-            pice=itemView.findViewById(R.id.topic_price);
-            image=itemView.findViewById(R.id.topic_image);
-            topic=itemView.findViewById(R.id.topic_topic);
-        }
-    }
+            recyclerView=itemView.findViewById(R.id.rec_rec);
 
-    @Override
-    public void onViewDetachedFromWindow(@NonNull RecyclerView.ViewHolder holder) {
-        if (holder.itemView instanceof RecyclerView) {
-            RecyclerView recyclerView = ((RecyclerView) holder.itemView);
-            LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
-            position = manager.findFirstVisibleItemPosition();
-            View view = manager.findViewByPosition(position);
-            ViewGroup.MarginLayoutParams lp =
-                    (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-            if (view != null) {
-                //如果你设置了margin则减去
-                xOffset = view.getLeft() - lp.leftMargin;
-            }
         }
-
-        super.onViewDetachedFromWindow(holder);
-    }
-
-    @Override
-    public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
-        if (holder.itemView instanceof RecyclerView) {
-            RecyclerView recyclerView = ((RecyclerView) holder.itemView);
-            LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
-            manager.scrollToPositionWithOffset(position, xOffset);
-        }
-        super.onViewAttachedToWindow(holder);
     }
 }
