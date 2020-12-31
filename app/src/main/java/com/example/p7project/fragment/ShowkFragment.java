@@ -23,6 +23,7 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.p7project.HomeMainActivity;
 import com.example.p7project.R;
+import com.example.p7project.bean.FenBean;
 import com.example.p7project.bean.ShouBean;
 import com.example.p7project.contract.MainContract;
 import com.example.p7project.dapter.GridLayoutBrandAdafel;
@@ -69,10 +70,8 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
     private ArrayList<ShouBean.DataDTO.TopicListDTO> topicListDTOS1;
     private LinerAdapterTopics linerAdapterTopics;
     private RecyclerView.RecycledViewPool recycledViewPool;
-
-
     private RecAdapter recAdapter;
-    private RewAdapter rewAdapter;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -101,8 +100,6 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         recycledViewPool = new RecyclerView.RecycledViewPool();
         rec.setRecycledViewPool(recycledViewPool);
         recycledViewPool.setMaxRecycledViews(0,10);
-
-        rec.addItemDecoration(new DividerItemDecoration(activity,DividerItemDecoration.VERTICAL));
 
         //banner通栏布局
         singleLayoutHelper = new SingleLayoutHelper();
@@ -135,7 +132,6 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         topicTitle();
         //专题
         topic();
-
         //居家
         homeImp();
         //监听事件
@@ -172,7 +168,6 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
             @Override
             public void itemClick(int pos) {
                 Toast.makeText(activity, "配件跳转未做", Toast.LENGTH_SHORT).show();
-
             }
         });
         //品牌
@@ -180,7 +175,6 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
             @Override
             public void itemClick(int pos) {
                 Toast.makeText(activity, "品牌跳转未做", Toast.LENGTH_SHORT).show();
-
             }
         });
         //week新品首发
@@ -277,7 +271,7 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         gridLayoutHelper.setMargin(20, 20, 20, 20);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
         gridLayoutHelper.setBgColor(Color.WHITE);// 设置背景颜色
         gridLayoutHelper.setAspectRatio(5);// 设置设置布局内每行布局的宽与高的比
-        // gridLayoutHelper特有属性（下面会详细说明）
+//        // gridLayoutHelper特有属性（下面会详细说明）
         gridLayoutHelper.setWeights(new float[]{22,22,22,22,22,22});//设置每行中 每个网格宽度 占 每行总宽度 的比例
         gridLayoutHelper.setVGap(20);// 控制子元素之间的垂直间距
         gridLayoutHelper.setHGap(20);// 控制子元素之间的水平间距
@@ -398,7 +392,6 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         gridLayoutHelperAdafel1 = new GridLayoutHelperAdafel(activity, brandListDTOS, gridLayoutHelper1);
 
     }
-
     //banner
     @Override
     public void Ok(ShouBean shouBean) {
@@ -431,6 +424,11 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         List<ShouBean.DataDTO.CategoryListDTO> categoryList = shouBean.getData().getCategoryList();
         goodsListDTOS.addAll(categoryList);
         gridLayoutHomeAdafel.notifyDataSetChanged();
+    }
+
+    @Override
+    public void OkFen(FenBean fenBean) {
+
     }
 
     @Override

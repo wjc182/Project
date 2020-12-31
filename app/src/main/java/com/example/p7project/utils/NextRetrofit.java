@@ -20,13 +20,20 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 public class NextRetrofit implements Imodel {
     private static volatile NextRetrofit nextRetrofit;
     private final Retrofit retrofit;
+    private final Retrofit retrofit1;
 
     public NextRetrofit() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(URL.baseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
+
+        retrofit1 = new Retrofit.Builder()
+                .baseUrl(URL.fenUrl)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
     }
+
     //单例模式
     public static NextRetrofit getInstance(){
         if(nextRetrofit==null){
@@ -55,10 +62,13 @@ public class NextRetrofit implements Imodel {
                         try {
                             String string = responseBody.string();
                             Type[] genericInterfaces = callback.getClass().getGenericInterfaces();
-                            Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[0]).getActualTypeArguments();
-                            Type type = actualTypeArguments[0];
-                            T json = new Gson().fromJson(string, type);
-                            callback.OnSuccess(json);
+                            for (int i = 0; i < genericInterfaces.length; i++) {
+                                Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[i]).getActualTypeArguments();
+                                Type type = actualTypeArguments[i];
+                                T json = new Gson().fromJson(string, type);
+                                callback.OnSuccess(json);
+                            }
+
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -75,6 +85,43 @@ public class NextRetrofit implements Imodel {
 
                     }
                 });
+        retrofit1.create(ApiRetrofit.class)
+                .get(url)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResponseBody responseBody) {
+                        try {
+                            String string = responseBody.string();
+                            Type[] genericInterfaces = callback.getClass().getGenericInterfaces();
+                            for (int i = 0; i < genericInterfaces.length; i++) {
+                                Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[i]).getActualTypeArguments();
+                                Type type = actualTypeArguments[i];
+                                T json = new Gson().fromJson(string, type);
+                                callback.OnSuccess(json);
+                            }
+
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        callback.OnFail("网络错误："+e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

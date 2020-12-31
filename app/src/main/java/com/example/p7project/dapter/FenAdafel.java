@@ -12,15 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.p7project.R;
-import com.example.p7project.bean.ShouBean;
+import com.example.p7project.bean.FenBean;
 
 import java.util.ArrayList;
+import java.util.logging.Handler;
 
-public class RecAdapter extends RecyclerView.Adapter {
+public class FenAdafel extends RecyclerView.Adapter {
     private Context context;
-    private ArrayList<ShouBean.DataDTO.TopicListDTO> list;
+    private ArrayList<FenBean.DataDTO.DataDTOs> list;
 
-    public RecAdapter(Context context, ArrayList<ShouBean.DataDTO.TopicListDTO> list) {
+    public FenAdafel(Context context, ArrayList<FenBean.DataDTO.DataDTOs> list) {
         this.context = context;
         this.list = list;
     }
@@ -28,9 +29,9 @@ public class RecAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.topic_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.fen_rec_item, parent, false);
 
-        return new ViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     private ItemListener itemListener;
@@ -40,18 +41,17 @@ public class RecAdapter extends RecyclerView.Adapter {
     }
 
     public interface ItemListener{
-        void itemClick(int  pos);
+        void itemClick(int pos);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ShouBean.DataDTO.TopicListDTO topicListDTO = list.get(position);
-        ViewHolder viewHolder= (ViewHolder) holder;
-        viewHolder.price.setText("￥"+topicListDTO.getPrice_info()+"起");
-        viewHolder.descs.setText(topicListDTO.getSubtitle());
-        viewHolder.name.setText(topicListDTO.getTitle());
-        Glide.with(context).load(topicListDTO.getScene_pic_url()).into(viewHolder.imageView);
-
+        FenBean.DataDTO.DataDTOs dataDTOs = list.get(position);
+        MyViewHolder viewHolder= (MyViewHolder) holder;
+        viewHolder.price.setText(dataDTOs.getPrice_info()+"元");
+        viewHolder.subTitle.setText(dataDTOs.getSubtitle());
+        viewHolder.title.setText(dataDTOs.getTitle());
+        Glide.with(context).load(dataDTOs.getScene_pic_url()).into(viewHolder.imageView);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,18 +65,18 @@ public class RecAdapter extends RecyclerView.Adapter {
         return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
-        private ImageView imageView;
-        private TextView   name;
-        private TextView   descs;
-        private TextView price;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            imageView=itemView.findViewById(R.id.topic_image);
-            name=itemView.findViewById(R.id.topic_ai);
-            descs=itemView.findViewById(R.id.topic_topic);
-            price=itemView.findViewById(R.id.topic_price);
 
+    class MyViewHolder extends RecyclerView.ViewHolder{
+        private ImageView imageView;
+        private TextView title;
+        private TextView   subTitle;
+        private TextView price;
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imageView=itemView.findViewById(R.id.fen_image);
+            title=itemView.findViewById(R.id.fen_title);
+            subTitle=itemView.findViewById(R.id.fen_subtitle);
+            price=itemView.findViewById(R.id.fen_pic);
         }
     }
 }

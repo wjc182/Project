@@ -14,5 +14,6 @@ public class ModelImp implements MainContract.IModel {
     @Override
     public <T> void Models(String string, CallBack<T> callBack) {
         NextRetrofit.getInstance().iModel(string,callBack);
+
     }
 }

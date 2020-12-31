@@ -49,9 +49,7 @@ public class GridLayoutHelperPeson extends DelegateAdapter.Adapter {
         this.itemListener = itemListener;
     }
 
-    public ItemListener getItemListener() {
-        return itemListener;
-    }
+
 
     public interface ItemListener{
         void itemClick(int  pos);

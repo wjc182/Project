@@ -10,6 +10,7 @@
         android:scaleType="centerCrop"
        android:layout_marginLeft="30dp"
         android:id="@+id/week_image"
+        android:background="#E7EDF3"
         />
 
     <TextView

@@ -49,10 +49,6 @@ public class GridLayoutBrandAdafel extends DelegateAdapter.Adapter {
         this.itemListener = itemListener;
     }
 
-    public ItemListener getItemListener() {
-        return itemListener;
-    }
-
     public interface ItemListener{
         void itemClick(int  pos);
     }
