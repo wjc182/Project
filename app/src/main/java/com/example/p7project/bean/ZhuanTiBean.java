@@ -163,6 +163,5 @@ public class ZhuanTiBean {
                 this.subtitle = subtitle;
             }
         }
-
     }
 }

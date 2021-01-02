@@ -50,11 +50,12 @@ public class ProFragment extends Fragment implements MainContract.IView{
 
 
     private void init() {
+        //第二页内容
         PresenterImp2 presenterImp2 = new PresenterImp2(this);
         presenterImp2.Presenter2();
     }
 
-    //准备数据
+    //准备数据第一页内容
     private void initData() {
         PresneterImp presneterImp = new PresneterImp(this);
         presneterImp.Presenter();
@@ -71,7 +72,7 @@ public class ProFragment extends Fragment implements MainContract.IView{
         //适配器
         fenAdafel = new ZhuanTiAdafel(activity,list);
         recFen.setAdapter(fenAdafel);
-
+        //监听事件
         fenAdafel.setItemListener(new ZhuanTiAdafel.ItemListener() {
             @Override
             public void itemClick(int pos) {
@@ -103,7 +104,6 @@ public class ProFragment extends Fragment implements MainContract.IView{
                 fenAdafel.notifyDataSetChanged();
                 //准备数据
                 init();
-
             }
         });
     }

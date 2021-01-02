@@ -1,6 +1,7 @@
 package com.example.p7project.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,7 @@ public class FenFragment extends Fragment implements MainContract.IView {
         edSou.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity, "搜索土司", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "搜索吐司", Toast.LENGTH_SHORT).show();
             }
         });
         RewFragment rewFragment = new RewFragment();
@@ -79,7 +80,9 @@ public class FenFragment extends Fragment implements MainContract.IView {
     @Override
     public void OkFenLei(FenLeiBean fenLeiBean) {
         for (int i = 0; i < fenLeiBean.getData().getCategoryList().size(); i++) {
+
             FenLeiBean.DataDTO.CurrentCategoryDTO currentCategory = fenLeiBean.getData().getCurrentCategory();
+
             RewFragment rewFragment = new RewFragment();
             Bundle bundle = new Bundle();
             bundle.putInt("id", currentCategory.getId());

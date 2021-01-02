@@ -1,4 +1,4 @@
-package com.example.p7project.dapter;
+package com.example.p7project.fendapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,18 +16,19 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.bumptech.glide.Glide;
 import com.example.p7project.R;
+import com.example.p7project.bean.FenLeiBean;
 import com.example.p7project.bean.ShouBean;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 
-public class SingleLayoutAdapter extends DelegateAdapter.Adapter {
-    private ArrayList<ShouBean.DataDTO.BannerDTO> list;
+public class SingleLayoutAdapterFenLei extends DelegateAdapter.Adapter {
+    private ArrayList<FenLeiBean.DataDTO.CategoryListDTO> list;
     private Context context;
     private SingleLayoutHelper singleLayoutHelper;
 
-    public SingleLayoutAdapter(ArrayList<ShouBean.DataDTO.BannerDTO> list, Context context, SingleLayoutHelper singleLayoutHelper) {
+    public SingleLayoutAdapterFenLei(ArrayList<FenLeiBean.DataDTO.CategoryListDTO> list, Context context, SingleLayoutHelper singleLayoutHelper) {
         this.list = list;
         this.context = context;
         this.singleLayoutHelper = singleLayoutHelper;
@@ -41,7 +42,7 @@ public class SingleLayoutAdapter extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.banner_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.fen_item, parent, false);
 
         return new ViewHolder(view);
     }
@@ -61,34 +62,34 @@ public class SingleLayoutAdapter extends DelegateAdapter.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder= (ViewHolder) holder;
-        viewHolder.banner.setImages(list)
-                .setImageLoader(new ImageLoader() {
-                    @Override
-                    public void displayImage(Context context, Object path, ImageView imageView) {
-                        ShouBean.DataDTO.BannerDTO newPath= (ShouBean.DataDTO.BannerDTO) path;
-                        Log.e("TTT",newPath.toString());
-                        Glide.with(context).load(newPath.getImageUrl()).into(imageView);
-                        imageView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                               // Toast.makeText(context, newPath.getId()+"", Toast.LENGTH_SHORT).show();
-                                itemListener.itemClick(position);
-                            }
-                        });
-                     }
-                }).start();
+        FenLeiBean.DataDTO.CategoryListDTO categoryListDTO = list.get(position);
+
+        viewHolder.desc.setText(categoryListDTO.getFront_desc());
+        Glide.with(context).load(categoryListDTO.getWap_banner_url()).into(viewHolder.wap_banner);
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemListener.itemClick(position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return 1;
+
     }
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private Banner banner;
+        private ImageView wap_banner;
+        private TextView desc;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            banner=itemView.findViewById(R.id.ban_image);
+            wap_banner=itemView.findViewById(R.id.wap_banner_url);
+            desc=itemView.findViewById(R.id.front_desc);
         }
     }
+
+
 }

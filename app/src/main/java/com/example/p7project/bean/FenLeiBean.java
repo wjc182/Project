@@ -293,7 +293,7 @@ public class FenLeiBean {
                 @SerializedName("img_url")
                 private String imgUrl;
                 @SerializedName("wap_banner_url")
-                private String wapBannerUrl;
+                private String wap_banner_url;
                 @SerializedName("level")
                 private String level;
                 @SerializedName("type")
@@ -389,12 +389,12 @@ public class FenLeiBean {
                     this.imgUrl = imgUrl;
                 }
 
-                public String getWapBannerUrl() {
-                    return wapBannerUrl;
+                public String getWap_banner_url() {
+                    return wap_banner_url;
                 }
 
-                public void setWapBannerUrl(String wapBannerUrl) {
-                    this.wapBannerUrl = wapBannerUrl;
+                public void setWap_banner_url(String wap_banner_url) {
+                    this.wap_banner_url = wap_banner_url;
                 }
 
                 public String getLevel() {
@@ -449,7 +449,7 @@ public class FenLeiBean {
             @SerializedName("keywords")
             private String keywords;
             @SerializedName("front_desc")
-            private String frontDesc;
+            private String front_desc;
             @SerializedName("parent_id")
             private Integer parentId;
             @SerializedName("sort_order")
@@ -465,7 +465,7 @@ public class FenLeiBean {
             @SerializedName("img_url")
             private String imgUrl;
             @SerializedName("wap_banner_url")
-            private String wapBannerUrl;
+            private String wap_banner_url;
             @SerializedName("level")
             private String level;
             @SerializedName("type")
@@ -497,13 +497,7 @@ public class FenLeiBean {
                 this.keywords = keywords;
             }
 
-            public String getFrontDesc() {
-                return frontDesc;
-            }
 
-            public void setFrontDesc(String frontDesc) {
-                this.frontDesc = frontDesc;
-            }
 
             public Integer getParentId() {
                 return parentId;
@@ -561,12 +555,20 @@ public class FenLeiBean {
                 this.imgUrl = imgUrl;
             }
 
-            public String getWapBannerUrl() {
-                return wapBannerUrl;
+            public String getFront_desc() {
+                return front_desc;
             }
 
-            public void setWapBannerUrl(String wapBannerUrl) {
-                this.wapBannerUrl = wapBannerUrl;
+            public void setFront_desc(String front_desc) {
+                this.front_desc = front_desc;
+            }
+
+            public String getWap_banner_url() {
+                return wap_banner_url;
+            }
+
+            public void setWap_banner_url(String wap_banner_url) {
+                this.wap_banner_url = wap_banner_url;
             }
 
             public String getLevel() {
