@@ -6,14 +6,13 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
@@ -22,6 +21,7 @@ import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.p7project.HomeMainActivity;
+import com.example.p7project.MainActivity;
 import com.example.p7project.R;
 import com.example.p7project.bean.FenBean;
 import com.example.p7project.bean.ShouBean;
@@ -36,7 +36,6 @@ import com.example.p7project.dapter.LinerAdapterPerson;
 import com.example.p7project.dapter.LinerAdapterTopic;
 import com.example.p7project.dapter.LinerAdapterTopics;
 import com.example.p7project.dapter.RecAdapter;
-import com.example.p7project.dapter.RewAdapter;
 import com.example.p7project.dapter.SingleLayoutAdapter;
 import com.example.p7project.dapter.WeekAdapter;
 import com.example.p7project.presenter.PresneterImp;
@@ -71,7 +70,7 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
     private LinerAdapterTopics linerAdapterTopics;
     private RecyclerView.RecycledViewPool recycledViewPool;
     private RecAdapter recAdapter;
-
+    private TextView edSou;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,7 +93,13 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         VirtualLayoutManager virtualLayoutManager = new VirtualLayoutManager(activity);
         rec=inflate.findViewById(R.id.rec_show);
         rec.setLayoutManager(virtualLayoutManager);
-
+        edSou = inflate.findViewById(R.id.ed_sou);
+        edSou.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(activity, "跳转新页面未做", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //组件复用
         recycledViewPool = new RecyclerView.RecycledViewPool();
@@ -430,6 +435,7 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
     public void OkFen(FenBean fenBean) {
 
     }
+
 
     @Override
     public void no(String error) {

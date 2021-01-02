@@ -6,36 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="仿网易云严选"
-        android:textSize="20sp"
-       android:textColor="#00050B"
-        />
 
-    <LinearLayout
-        android:layout_width="588dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="50dp"
-        android:background="#E8EBEF"
-        android:gravity="center">
-        <ImageView
-            android:layout_marginLeft="150dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/sou"
-            android:paddingLeft="20dp"
-            />
-        <TextView
-            android:id="@+id/ed_sou"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="商品搜索，共239款好物"
-
-            />
-    </LinearLayout>
 
     <FrameLayout
         android:layout_marginTop="10dp"

@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E4E7EA"
+    android:orientation="vertical"
     tools:context=".fragment.ShowkFragment">
 
+    <LinearLayout
+        android:layout_width="588dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="50dp"
+        android:background="#E8EBEF"
+        android:gravity="center">
+        <ImageView
+            android:layout_marginLeft="150dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/sou"
+            android:paddingLeft="20dp"
+            />
+        <TextView
+            android:id="@+id/ed_sou"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="商品搜索，共239款好物"
+            />
+    </LinearLayout>
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -13,4 +35,4 @@
         android:id="@+id/rec_show"
      />
 
-</FrameLayout>
+</LinearLayout>

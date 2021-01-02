@@ -11,6 +11,8 @@ public class MainContract {
     }
     public interface IPresenter{
         void Presenter();
+        
+        void Presenter2();
     }
     public interface IView  {
         void Ok(ShouBean shouBean);

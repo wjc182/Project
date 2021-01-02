@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +19,7 @@ import com.example.p7project.bean.FenBean;
 import com.example.p7project.bean.ShouBean;
 import com.example.p7project.contract.MainContract;
 import com.example.p7project.dapter.FenAdafel;
+import com.example.p7project.presenter.PresenterImp2;
 import com.example.p7project.presenter.PresneterImp;
 
 import java.util.ArrayList;
@@ -26,8 +29,8 @@ import java.util.List;
 public class ProFragment extends Fragment implements MainContract.IView{
 
     private RecyclerView recFen;
-    private Button up;
-    private Button next;
+    private TextView up;
+    private TextView next;
     private FragmentActivity activity;
     private ArrayList<FenBean.DataDTO.DataDTOs> list;
     private FenAdafel fenAdafel;
@@ -39,10 +42,19 @@ public class ProFragment extends Fragment implements MainContract.IView{
         View view = inflater.inflate(R.layout.fragment_pro, container, false);
         activity = getActivity();
         initView(view);
-        //准备数据
+        //准备数据第一页
         initData();
+        //监听
+        onListener();
         return view;
     }
+
+
+    private void init() {
+        PresenterImp2 presenterImp2 = new PresenterImp2(this);
+        presenterImp2.Presenter2();
+    }
+
     //准备数据
     private void initData() {
         PresneterImp presneterImp = new PresneterImp(this);
@@ -60,14 +72,13 @@ public class ProFragment extends Fragment implements MainContract.IView{
         //适配器
         fenAdafel = new FenAdafel(activity,list);
         recFen.setAdapter(fenAdafel);
+
         fenAdafel.setItemListener(new FenAdafel.ItemListener() {
             @Override
             public void itemClick(int pos) {
-                Toast.makeText(activity, "专题未做", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "专题跳转未做", Toast.LENGTH_SHORT).show();
             }
         });
-        //监听
-        onListener();
     }
 
     private void onListener() {
@@ -75,19 +86,28 @@ public class ProFragment extends Fragment implements MainContract.IView{
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //每点击一次按钮就清除一次集合便于加载新的内容
+                list.clear();
+                //刷新适配器
+                fenAdafel.notifyDataSetChanged();
+                //准备数据
+                initData();
             }
         });
         //下一页
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //每点击一次按钮就清除一次集合便于加载新的内容
+                list.clear();
+                //刷新适配器
+                fenAdafel.notifyDataSetChanged();
+                //准备数据
+                init();
 
             }
         });
     }
-
     @Override
     public void Ok(ShouBean shouBean) {
 
@@ -98,6 +118,7 @@ public class ProFragment extends Fragment implements MainContract.IView{
         List<FenBean.DataDTO.DataDTOs> data = fenBean.getData().getData();
         list.addAll(data);
         fenAdafel.notifyDataSetChanged();
+
     }
 
     @Override

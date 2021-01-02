@@ -62,12 +62,12 @@ public class NextRetrofit implements Imodel {
                         try {
                             String string = responseBody.string();
                             Type[] genericInterfaces = callback.getClass().getGenericInterfaces();
-                            for (int i = 0; i < genericInterfaces.length; i++) {
-                                Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[i]).getActualTypeArguments();
-                                Type type = actualTypeArguments[i];
+
+                                Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[0]).getActualTypeArguments();
+                                Type type = actualTypeArguments[0];
                                 T json = new Gson().fromJson(string, type);
                                 callback.OnSuccess(json);
-                            }
+
 
 
                         } catch (IOException e) {
@@ -85,6 +85,7 @@ public class NextRetrofit implements Imodel {
 
                     }
                 });
+
         retrofit1.create(ApiRetrofit.class)
                 .get(url)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -100,12 +101,12 @@ public class NextRetrofit implements Imodel {
                         try {
                             String string = responseBody.string();
                             Type[] genericInterfaces = callback.getClass().getGenericInterfaces();
-                            for (int i = 0; i < genericInterfaces.length; i++) {
-                                Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[i]).getActualTypeArguments();
-                                Type type = actualTypeArguments[i];
+
+                                Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[0]).getActualTypeArguments();
+                                Type type = actualTypeArguments[0];
                                 T json = new Gson().fromJson(string, type);
                                 callback.OnSuccess(json);
-                            }
+
 
 
                         } catch (IOException e) {

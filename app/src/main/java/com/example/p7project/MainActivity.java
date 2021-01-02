@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton Me;
     private RadioGroup radioGroup;
     private FragmentManager supportFragmentManager;
-    private TextView edSou;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +42,7 @@ public class MainActivity extends AppCompatActivity {
         proFess = (RadioButton) findViewById(R.id.pro_fess);
         Choose = (RadioButton) findViewById(R.id.Choose);
         ShowCar = (RadioButton) findViewById(R.id.Show_Car);
-        edSou = (TextView) findViewById(R.id.ed_sou);
-        edSou.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "跳转新页面未做", Toast.LENGTH_SHORT).show();
-            }
-        });
+
         Me = (RadioButton) findViewById(R.id.Me);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         ShowkFragment showkFragment = new ShowkFragment();
