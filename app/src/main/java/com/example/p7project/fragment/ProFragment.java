@@ -4,21 +4,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.p7project.R;
-import com.example.p7project.bean.FenBean;
+import com.example.p7project.bean.FenLeiBean;
+import com.example.p7project.bean.ZhuanTiBean;
 import com.example.p7project.bean.ShouBean;
 import com.example.p7project.contract.MainContract;
-import com.example.p7project.dapter.FenAdafel;
+import com.example.p7project.dapter.ZhuanTiAdafel;
 import com.example.p7project.presenter.PresenterImp2;
 import com.example.p7project.presenter.PresneterImp;
 
@@ -32,8 +31,8 @@ public class ProFragment extends Fragment implements MainContract.IView{
     private TextView up;
     private TextView next;
     private FragmentActivity activity;
-    private ArrayList<FenBean.DataDTO.DataDTOs> list;
-    private FenAdafel fenAdafel;
+    private ArrayList<ZhuanTiBean.DataDTO.DataDTOs> list;
+    private ZhuanTiAdafel fenAdafel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,10 +69,10 @@ public class ProFragment extends Fragment implements MainContract.IView{
         //集合
         list = new ArrayList<>();
         //适配器
-        fenAdafel = new FenAdafel(activity,list);
+        fenAdafel = new ZhuanTiAdafel(activity,list);
         recFen.setAdapter(fenAdafel);
 
-        fenAdafel.setItemListener(new FenAdafel.ItemListener() {
+        fenAdafel.setItemListener(new ZhuanTiAdafel.ItemListener() {
             @Override
             public void itemClick(int pos) {
                 Toast.makeText(activity, "专题跳转未做", Toast.LENGTH_SHORT).show();
@@ -114,10 +113,15 @@ public class ProFragment extends Fragment implements MainContract.IView{
     }
 
     @Override
-    public void OkFen(FenBean fenBean) {
-        List<FenBean.DataDTO.DataDTOs> data = fenBean.getData().getData();
+    public void OkFen(ZhuanTiBean fenBean) {
+        List<ZhuanTiBean.DataDTO.DataDTOs> data = fenBean.getData().getData();
         list.addAll(data);
         fenAdafel.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void OkFenLei(FenLeiBean fenLeiBean) {
 
     }
 

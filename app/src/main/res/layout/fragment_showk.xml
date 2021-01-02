@@ -6,7 +6,6 @@
     android:background="#E4E7EA"
     android:orientation="vertical"
     tools:context=".fragment.ShowkFragment">
-
     <LinearLayout
         android:layout_width="588dp"
         android:layout_height="wrap_content"

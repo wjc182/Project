@@ -21,9 +21,9 @@ import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.p7project.HomeMainActivity;
-import com.example.p7project.MainActivity;
 import com.example.p7project.R;
-import com.example.p7project.bean.FenBean;
+import com.example.p7project.bean.FenLeiBean;
+import com.example.p7project.bean.ZhuanTiBean;
 import com.example.p7project.bean.ShouBean;
 import com.example.p7project.contract.MainContract;
 import com.example.p7project.dapter.GridLayoutBrandAdafel;
@@ -432,7 +432,12 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
     }
 
     @Override
-    public void OkFen(FenBean fenBean) {
+    public void OkFen(ZhuanTiBean fenBean) {
+
+    }
+
+    @Override
+    public void OkFenLei(FenLeiBean fenLeiBean) {
 
     }
 

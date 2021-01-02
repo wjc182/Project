@@ -1,8 +1,7 @@
 package com.example.p7project.presenter;
 
-import android.view.View;
-
-import com.example.p7project.bean.FenBean;
+import com.example.p7project.bean.FenLeiBean;
+import com.example.p7project.bean.ZhuanTiBean;
 import com.example.p7project.bean.ShouBean;
 import com.example.p7project.contract.MainContract;
 import com.example.p7project.model.ModelImp;
@@ -31,10 +30,10 @@ public class PresneterImp implements MainContract.IPresenter {
             }
         });
 
-        modelImp.Models("list?page=1&size=10", new CallBack<FenBean>() {
+        modelImp.Models("topic/list?page=1&size=10", new CallBack<ZhuanTiBean>() {
             @Override
-            public void OnSuccess(FenBean fenBean) {
-                view.OkFen(fenBean);
+            public void OnSuccess(ZhuanTiBean zhuanTiBean) {
+                view.OkFen(zhuanTiBean);
             }
 
             @Override
@@ -43,6 +42,17 @@ public class PresneterImp implements MainContract.IPresenter {
             }
         });
 
+        modelImp.Models("catalog/index?id=1005000", new CallBack<FenLeiBean>() {
+            @Override
+            public void OnSuccess(FenLeiBean fenLeiBean) {
+                view.OkFenLei(fenLeiBean);
+            }
+
+            @Override
+            public void OnFail(String error) {
+
+            }
+        });
     }
 
     @Override

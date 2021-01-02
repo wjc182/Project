@@ -12,16 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.p7project.R;
-import com.example.p7project.bean.FenBean;
+import com.example.p7project.bean.ZhuanTiBean;
 
 import java.util.ArrayList;
-import java.util.logging.Handler;
 
-public class FenAdafel extends RecyclerView.Adapter {
+public class ZhuanTiAdafel extends RecyclerView.Adapter {
     private Context context;
-    private ArrayList<FenBean.DataDTO.DataDTOs> list;
+    private ArrayList<ZhuanTiBean.DataDTO.DataDTOs> list;
 
-    public FenAdafel(Context context, ArrayList<FenBean.DataDTO.DataDTOs> list) {
+    public ZhuanTiAdafel(Context context, ArrayList<ZhuanTiBean.DataDTO.DataDTOs> list) {
         this.context = context;
         this.list = list;
     }
@@ -46,7 +45,7 @@ public class FenAdafel extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        FenBean.DataDTO.DataDTOs dataDTOs = list.get(position);
+        ZhuanTiBean.DataDTO.DataDTOs dataDTOs = list.get(position);
         MyViewHolder viewHolder= (MyViewHolder) holder;
         viewHolder.price.setText(dataDTOs.getPrice_info()+"元");
         viewHolder.subTitle.setText(dataDTOs.getSubtitle());

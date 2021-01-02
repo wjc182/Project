@@ -1,8 +1,6 @@
 package com.example.p7project.presenter;
 
-import android.view.View;
-
-import com.example.p7project.bean.FenBean;
+import com.example.p7project.bean.ZhuanTiBean;
 import com.example.p7project.contract.MainContract;
 import com.example.p7project.model.ModelImp;
 import com.example.p7project.utils.CallBack;
@@ -24,9 +22,9 @@ public class PresenterImp2 implements MainContract.IPresenter {
 
     @Override
     public void Presenter2() {
-        modelImp.Models("list?page=2&size=10", new CallBack<FenBean>() {
+        modelImp.Models("topic/list?page=2&size=10", new CallBack<ZhuanTiBean>() {
             @Override
-            public void OnSuccess(FenBean fenBean) {
+            public void OnSuccess(ZhuanTiBean fenBean) {
                 view.OkFen(fenBean);
             }
 

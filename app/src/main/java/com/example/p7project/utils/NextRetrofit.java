@@ -32,6 +32,7 @@ public class NextRetrofit implements Imodel {
                 .baseUrl(URL.fenUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
+
     }
 
     //单例模式

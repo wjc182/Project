@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class FenBean {
+public class ZhuanTiBean {
 
     /**
      * errno : 0
@@ -163,5 +163,6 @@ public class FenBean {
                 this.subtitle = subtitle;
             }
         }
+
     }
 }

@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
+    android:orientation="vertical"
     tools:context=".fragment.FenFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <LinearLayout
+        android:layout_width="588dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="50dp"
+        android:background="#E8EBEF"
+        android:gravity="center">
+        <ImageView
+            android:layout_marginLeft="150dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/sou"
+            android:paddingLeft="20dp"
+            />
+        <TextView
+            android:id="@+id/ed_sou"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="商品搜索，共239款好物"
+            />
+    </LinearLayout>
 
-</FrameLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal"
+      >
+      <com.google.android.material.tabs.TabLayout
+          android:layout_width="50dp"
+          android:layout_height="match_parent"
+          android:id="@+id/tab_fen"
+          />
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:id="@+id/fen_frame"
+          />
+  </LinearLayout>
+</LinearLayout>
