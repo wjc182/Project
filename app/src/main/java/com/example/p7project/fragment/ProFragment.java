@@ -43,8 +43,6 @@ public class ProFragment extends Fragment implements MainContract.IView{
         initView(view);
         //准备数据第一页
         initData();
-        //监听
-        onListener();
         return view;
     }
 
@@ -79,6 +77,8 @@ public class ProFragment extends Fragment implements MainContract.IView{
                 Toast.makeText(activity, "专题跳转未做", Toast.LENGTH_SHORT).show();
             }
         });
+        //监听
+        onListener();
     }
 
     private void onListener() {
@@ -88,10 +88,10 @@ public class ProFragment extends Fragment implements MainContract.IView{
             public void onClick(View v) {
                 //每点击一次按钮就清除一次集合便于加载新的内容
                 list.clear();
-                //刷新适配器
-                fenAdafel.notifyDataSetChanged();
                 //准备数据
                 initData();
+                //刷新适配器
+                fenAdafel.notifyDataSetChanged();
             }
         });
         //下一页
@@ -100,10 +100,10 @@ public class ProFragment extends Fragment implements MainContract.IView{
             public void onClick(View v) {
                 //每点击一次按钮就清除一次集合便于加载新的内容
                 list.clear();
-                //刷新适配器
-                fenAdafel.notifyDataSetChanged();
                 //准备数据
                 init();
+                //刷新适配器
+                fenAdafel.notifyDataSetChanged();
             }
         });
     }
@@ -117,11 +117,6 @@ public class ProFragment extends Fragment implements MainContract.IView{
         List<ZhuanTiBean.DataDTO.DataDTOs> data = fenBean.getData().getData();
         list.addAll(data);
         fenAdafel.notifyDataSetChanged();
-
-    }
-
-    @Override
-    public void OkFenLei(FenLeiBean fenLeiBean) {
 
     }
 

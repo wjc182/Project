@@ -18,7 +18,7 @@ public class PresneterImp implements MainContract.IPresenter {
     }
     @Override
     public void Presenter() {
-        modelImp.Models("api/index", new CallBack<ShouBean>() {
+        modelImp.Models("/index", new CallBack<ShouBean>() {
             @Override
             public void OnSuccess(ShouBean shouBean) {
                 view.Ok(shouBean);
@@ -34,18 +34,6 @@ public class PresneterImp implements MainContract.IPresenter {
             @Override
             public void OnSuccess(ZhuanTiBean zhuanTiBean) {
                 view.OkFen(zhuanTiBean);
-            }
-
-            @Override
-            public void OnFail(String error) {
-
-            }
-        });
-
-        modelImp.Models("catalog/index?id=1005000", new CallBack<FenLeiBean>() {
-            @Override
-            public void OnSuccess(FenLeiBean fenLeiBean) {
-                view.OkFenLei(fenLeiBean);
             }
 
             @Override

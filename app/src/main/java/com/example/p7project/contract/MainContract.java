@@ -20,7 +20,6 @@ public class MainContract {
 
         void OkFen(ZhuanTiBean fenBean);
 
-        void OkFenLei(FenLeiBean fenLeiBean);
 
         void no(String error);
     }

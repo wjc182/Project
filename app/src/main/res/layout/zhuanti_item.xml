@@ -13,13 +13,13 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:id="@+id/fen_image"
+        android:id="@+id/zhuan_image"
         android:scaleType="centerCrop"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fen_title"
+        android:id="@+id/zhuan_title"
         android:textSize="20sp"
         android:text="124"
         android:textColor="#123"
@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fen_subtitle"
+        android:id="@+id/zhuan_subtitle"
         android:textSize="15sp"
         android:gravity="center"
         android:layout_marginTop="250dp"
@@ -37,7 +37,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fen_pic"
+        android:id="@+id/zhuan_pic"
         android:gravity="center"
         android:textColor="#DF0922"
         android:textSize="15sp"

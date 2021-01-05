@@ -28,7 +28,7 @@ public class ZhuanTiAdafel extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.fen_rec_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.zhuanti_item, parent, false);
 
         return new MyViewHolder(view);
     }
@@ -72,10 +72,10 @@ public class ZhuanTiAdafel extends RecyclerView.Adapter {
         private TextView price;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.fen_image);
-            title=itemView.findViewById(R.id.fen_title);
-            subTitle=itemView.findViewById(R.id.fen_subtitle);
-            price=itemView.findViewById(R.id.fen_pic);
+            imageView=itemView.findViewById(R.id.zhuan_image);
+            title=itemView.findViewById(R.id.zhuan_title);
+            subTitle=itemView.findViewById(R.id.zhuan_subtitle);
+            price=itemView.findViewById(R.id.zhuan_pic);
         }
     }
 }

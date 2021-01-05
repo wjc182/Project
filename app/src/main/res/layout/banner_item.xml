@@ -7,4 +7,5 @@
     android:layout_height="200dp"
     android:id="@+id/ban_image"
     />
+
 </LinearLayout>

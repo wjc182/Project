@@ -67,8 +67,8 @@ public class GridLayoutHomeAdafel extends DelegateAdapter.Adapter {
         viewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context,2));
         ArrayList<ShouBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsList = (ArrayList<ShouBean.DataDTO.CategoryListDTO.GoodsListDTO>) categoryListDTO.getGoodsList();
         rewAdapter=new RewAdapter(goodsList,context);
-
         viewHolder.recyclerView.setAdapter(rewAdapter);
+
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

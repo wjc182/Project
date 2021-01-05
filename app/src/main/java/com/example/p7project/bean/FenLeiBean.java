@@ -121,6 +121,7 @@ public class FenLeiBean {
             @SerializedName("front_name")
             private String frontName;
             @SerializedName("subCategoryList")
+
             private List<SubCategoryListDTO> subCategoryList;
 
             public Integer getId() {
@@ -441,6 +442,17 @@ public class FenLeiBean {
              * type : 0
              * front_name : 回家，放松身心
              */
+
+
+            private boolean isCheck;
+
+            public boolean isCheck() {
+                return isCheck;
+            }
+
+            public void setCheck(boolean check) {
+                isCheck = check;
+            }
 
             @SerializedName("id")
             private Integer id;

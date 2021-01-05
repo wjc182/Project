@@ -224,8 +224,6 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
         gridLayoutHomeAdafel = new GridLayoutHomeAdafel(activity,gridLayoutHelper4,goodsListDTOS);
     }
 
-
-
     private void topicTitle() {
         /**
          设置线性布局
@@ -435,12 +433,6 @@ public class ShowkFragment extends Fragment implements MainContract.IView {
     public void OkFen(ZhuanTiBean fenBean) {
 
     }
-
-    @Override
-    public void OkFenLei(FenLeiBean fenLeiBean) {
-
-    }
-
 
     @Override
     public void no(String error) {
