@@ -1,14 +1,14 @@
-package com.example.p7project;
+package com.example.p7project.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class HomeMainActivity extends AppCompatActivity {
+public class PersonDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_main);
+        setContentView(R.layout.activity_person_details);
     }
 }

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.p7project.guido.contract.GuiDeContract;
 import com.example.p7project.guido.presenter.GuiDePresenter;
+import com.example.p7project.view.HomeActivity;
 
 public class GuiDeActivity extends AppCompatActivity implements GuiDeContract.GuiView {
 
@@ -41,7 +42,7 @@ public class GuiDeActivity extends AppCompatActivity implements GuiDeContract.Gu
 
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(objectAnimator);
-        animatorSet.setDuration(2000);
+        animatorSet.setDuration(5000);
         animatorSet.start();
         animatorSet.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -55,7 +56,7 @@ public class GuiDeActivity extends AppCompatActivity implements GuiDeContract.Gu
     @Override
     public void onSuccess() {
         //跳转
-        startActivity(new Intent(GuiDeActivity.this,HomeActivity.class));
+        startActivity(new Intent(GuiDeActivity.this, HomeActivity.class));
         finish();
     }
 

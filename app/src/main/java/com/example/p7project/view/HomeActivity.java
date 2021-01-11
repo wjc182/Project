@@ -51,9 +51,9 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.IVie
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        int id = 2;
+                        int id = 3;
                         textTimer.setText((id - aLong) + "s");
-                        if(aLong>=2){
+                        if(aLong>=3){
                            subscribe.dispose();
                             onSuccessTaken();
                         }
